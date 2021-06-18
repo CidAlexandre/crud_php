@@ -1,2 +1,4 @@
 # crud_php
-sistema de login e cadastramento com php
+Simple crud with User and Products.
+in terminal run - composer dump-autoload
+then composer will download psr-4.
