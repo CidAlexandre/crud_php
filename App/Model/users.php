@@ -7,14 +7,15 @@ class Users{
 
     public function login($e, $p){
         $sql = "SELECT * FROM user WHERE email = ?, password = ?";
-        $stmt = Connect::getConnection()->preprare($sql);
-        $stmt->bindValue(1, $this->getEmail());
-        $stmt->bindValue(2, md5($this->getPassword()));
+
+        $stmt = Connect::getConnection()->prepare($sql);
+        $stmt->bindValue(1, $e);
+        $stmt->bindValue(2, $p);
         $stmt->execute();
 
-        if($stmt->rowcount > 0):
-            $data = $stmt->fetchAll(FETCH_ASSOC);
-            
+        if($stmt->rowCount() > 0):
+            $data = $stmt->fetchAll(\PDO::FETCH_ALL);
+            $_SESSION['login'] = true;
             $_SESSION['id']=$data['id'];
             return true;
         else:
