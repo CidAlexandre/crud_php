@@ -1,16 +1,32 @@
-<html>
-<head>
-<title>Login</title>
-<meta charset='UTF-8'>
-</head>
-<body>
-    <h1>Login</h1>
-    <form action="logar.php" method="POST">
-    Login: <input type="text" name="login"> <br>
-    Senha: <input type="password" name="password"> <br>
-    <button type="submit" name="btn-login">Entrar</button><br>
-    <b>Caso não tenha cadastro, </b><a href=#>clique aqui</a>
-    </form>
+<?php
+  session_start();
+  $_SESSION = array();
+  session_destroy();
+?>
 
-</body>
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <b>
+      <?php
+        if (isset($_GET['msg'])){
+          echo '<p align=center> Falha na autenticação </p>';
+        }
+      ?>
+
+      <div align='center'>
+        <form action="logar.php" method="post">
+          <h2>Email: <input type=email name="f_mail"/></h2>
+          <br>
+          <h2>Senha: <input type=password name="f_senha"/></h2>
+          <br>
+          <button>Enviar</button>
+        </form>
+      </div>
+    </b>
+  </body>
 </html>
