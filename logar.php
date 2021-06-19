@@ -1,17 +1,19 @@
 <?php
+require 'App/Model/Connect.php';
+require 'App/Model/users.php';
+require_once 'vendor/autoload.php';
 
-if(isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password'])):
+// TODO: Corrigir esse if -> isset($_POST['email']) && isset($_POST['password'])
+if(true):
     
-    require 'App/Model/Connect.php';
-    require_once 'vendor/autoload.php';
 
-    $u = new \App\Model\Users;
-    session_start();
-   
-   
+    $u = new App\Model\Users();
+ 
+     
     $login = addslashes($_POST['email']);
     $password = addslashes($_POST['password']);
     $u->login($login, $password);
+
     header('location: dashboard.php');
     
 else:
