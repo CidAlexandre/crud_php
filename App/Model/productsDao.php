@@ -1,5 +1,6 @@
 <?php
 namespace App\Model;
+
 class ProductsDao{
     public function createProduct(Products $p){
         $sql ="INSERT INTO produtos (name, description) VALUES (?,?)";
@@ -10,18 +11,19 @@ class ProductsDao{
         $stmt->execute();
     }
 
-    public function updateProduct(Products $p){
+    public function updateProduct($pID, $pN, $pD){
+
         $sql = "UPDATE produtos SET name=?, description=? WHERE id= ?";
 
         $stmt = Connect::getConnection()->prepare($sql);
-        $stmt->bindValue(1, $p->getName());
-        $stmt->bindValue(1, $p->getDescription());
-        $stmt->bindValue(1, $p->getId());
+        $stmt->bindValue(1, $pN);
+        $stmt->bindValue(2, $pD());
+        $stmt->bindValue(3, $pID());
         
         $stmt->execute();
     }
 
-    public function readProduct(Products $p){
+    public function readProduct(){
         $sql = "SELECT * FROM produtos";
 
         $stmt = Connect::getConnection()->prepare($sql);
@@ -35,11 +37,11 @@ class ProductsDao{
         endif;
     }
 
-    public function deleteProduct(Products $p){
+    public function deleteProduct($p){
         $sql = "DELETE FROM produtos WHERE id=?";
 
-        $stmt = Connection::getConection()->prepare($sql);
-        $stmt->bindValue(1, $p->getId());
+        $stmt = Connect::getConnection()->prepare($sql);
+        $stmt->bindValue(1, $p);
 
         $stmt->execute();
     }
